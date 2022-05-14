@@ -1,16 +1,22 @@
-import {useState} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {incrementAction, resetAction, decrementAction} from '../../store/actionCreators';
 
 function Counter() {
-    const [count, setCount] = useState(0);
+    const count = useSelector(state => state.count);
+    const dispatch = useDispatch()
+
+    const decrement = () => dispatch(decrementAction());
+    const reset = () => dispatch(resetAction());
+    const increment = () => dispatch(incrementAction());
 
     return (
         <div>
             <h3>Count: {count}</h3>
 
             <div>
-                <button onClick={() => setCount(count - 1)}>- Decrement</button>
-                <button onClick={() => setCount(0)}>Reset</button>
-                <button onClick={() => setCount(count + 1)}>+ Increment</button>
+                <button onClick={decrement}>- Decrement</button>
+                <button onClick={reset}>Reset</button>
+                <button onClick={increment}>+ Increment</button>
             </div>
         </div>
     )
